@@ -1,0 +1,225 @@
+codigo 1: 
+
+#include <iostream>
+using namespace std;
+
+struct silla {
+    char material[20];
+    char color[20];
+    char tipo[20];
+    int altura;
+} silla1[3];
+
+int main() {
+    for(int i = 0; i < 3; i++) {
+        cout << "Ingrese el material de la silla " << i + 1 << ": ";
+        cin >> silla1[i].material;
+        cout << "Ingrese el color " << i + 1 << ": ";
+        cin >> silla1[i].color;
+        cout << "Ingrese el tipo " << i + 1 << ": ";
+        cin >> silla1[i].tipo;
+        cout << "Ingrese la altura " << i + 1 << ": ";
+        cin >> silla1[i].altura;
+    }
+    return 0;
+}
+
+
+
+
+codigo 2: 
+
+#include <iostream>
+using namespace std;
+
+struct servidor {
+    char sistemaOperativo[20];
+    char ubicacion[20];
+    int capacidadRAM;
+    char marca[20];
+} servidor1[3];
+
+int main() {
+    for(int i = 0; i < 3; i++) {
+        cout << "Ingrese el sistema operativo del servidor " << i + 1 << ": ";
+        cin >> servidor1[i].sistemaOperativo;
+        cout << "Ingrese la ubicación " << i + 1 << ": ";
+        cin >> servidor1[i].ubicacion;
+        cout << "Ingrese la capacidad de RAM (en GB) " << i + 1 << ": ";
+        cin >> servidor1[i].capacidadRAM;
+        cout << "Ingrese la marca " << i + 1 << ": ";
+        cin >> servidor1[i].marca;
+    }
+    return 0;
+}
+
+
+
+codigo 3:
+
+#include <iostream>
+using namespace std;
+
+struct mochila {
+    char color[20];
+    char tamano[20];
+    int compartimentos;
+    char marca[20];
+} mochila1[3];
+
+int main() {
+    for(int i = 0; i < 3; i++) {
+        cout << "Ingrese el color de la mochila " << i + 1 << ": ";
+        cin >> mochila1[i].color;
+        cout << "Ingrese el tamaño " << i + 1 << ": ";
+        cin >> mochila1[i].tamano;
+        cout << "Ingrese el número de compartimentos " << i + 1 << ": ";
+        cin >> mochila1[i].compartimentos;
+        cout << "Ingrese la marca " << i + 1 << ": ";
+        cin >> mochila1[i].marca;
+    }
+    return 0;
+}
+
+
+
+codigo 4: 
+
+#include <iostream>
+using namespace std;
+
+struct laptop {
+    char procesador[20];
+    char ram[20];
+    char almacenamiento[20];
+    int precio;
+    char marca[20];
+} laptop1[3];
+
+int main() {
+    for(int i = 0; i < 3; i++) {
+        cout << "Ingrese el procesador de la laptop " << i + 1 << ": ";
+        cin >> laptop1[i].procesador;
+        cout << "Ingrese la RAM " << i + 1 << ": ";
+        cin >> laptop1[i].ram;
+        cout << "Ingrese el almacenamiento " << i + 1 << ": ";
+        cin >> laptop1[i].almacenamiento;
+        cout << "Ingrese el precio " << i + 1 << ": ";
+        cin >> laptop1[i].precio;
+        cout << "Ingrese la marca " << i + 1 << ": ";
+        cin >> laptop1[i].marca;
+    }
+    return 0;
+}
+
+
+
+
+
+
+codigo 5:
+
+#include <iostream>
+using namespace std;
+
+struct estudiante {
+    char nombre[20];
+    char carrera[20];
+    int edad;
+    char universidad[20];
+} estudiante1[3];
+
+int main() {
+    for(int i = 0; i < 3; i++) {
+        cout << "Ingrese el nombre del estudiante " << i + 1 << ": ";
+        cin >> estudiante1[i].nombre;
+        cout << "Ingrese la carrera " << i + 1 << ": ";
+        cin >> estudiante1[i].carrera;
+        cout << "Ingrese la edad " << i + 1 << ": ";
+        cin >> estudiante1[i].edad;
+        cout << "Ingrese la universidad " << i + 1 << ": ";
+        cin >> estudiante1[i].universidad;
+    }
+    return 0;
+}
+
+
+
+
+
+codigo 6:
+
+#include <iostream>
+using namespace std;
+
+struct variableEstadistica {
+    char nombre[20];
+    char tipo[20];
+} variableEstadistica1[3];
+
+int main() {
+    for(int i = 0; i < 3; i++) {
+        cout << "Ingrese el nombre de la variable estadística " << i + 1 << ": ";
+        cin >> variableEstadistica1[i].nombre;
+        cout << "Ingrese el tipo (cuantitativa/cualitativa) " << i + 1 << ": ";
+        cin >> variableEstadistica1[i].tipo;
+    }
+    return 0;
+}
+
+
+
+
+
+codigo 7:
+
+#include <iostream>
+using namespace std;
+
+struct IDE {
+    char nombre[20];
+    char lenguajeSoportado[20];
+    char sistemaOperativo[20];
+} IDE1[3];
+
+int main() {
+    for(int i = 0; i < 3; i++) {
+        cout << "Ingrese el nombre del IDE " << i + 1 << ": ";
+        cin >> IDE1[i].nombre;
+        cout << "Ingrese el lenguaje soportado " << i + 1 << ": ";
+        cin >> IDE1[i].lenguajeSoportado;
+        cout << "Ingrese el sistema operativo compatible " << i + 1 << ": ";
+        cin >> IDE1[i].sistemaOperativo;
+    }
+    return 0;
+}
+
+
+
+
+
+codigo 8:
+
+#include <iostream>
+using namespace std;
+
+struct red {
+    char protocolo[20];
+    char velocidad[20];
+    char proveedor[20];
+    int latencia;
+} red1[3];
+
+int main() {
+    for(int i = 0; i < 3; i++) {
+        cout << "Ingrese el protocolo " << i + 1 << ": ";
+        cin >> red1[i].protocolo;
+        cout << "Ingrese la velocidad " << i + 1 << ": ";
+        cin >> red1[i].velocidad;
+        cout << "Ingrese el proveedor " << i + 1 << ": ";
+        cin >> red1[i].proveedor;
+        cout << "Ingrese la latencia " << i + 1 << ": ";
+        cin >> red1[i].latencia;
+    }
+    return 0;
+}
