@@ -1,0 +1,73 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Definición del nodo
+struct Estudiante {
+    string nombre;
+    float nota;
+    Estudiante* siguiente;
+};
+
+// Función para agregar estudiante aprobado a la lista
+void agregarEstudiante(Estudiante*& cabeza, string nombre, float nota) {
+    Estudiante* nuevo = new Estudiante();
+    nuevo->nombre = nombre;
+    nuevo->nota = nota;
+    nuevo->siguiente = nullptr;
+
+    if (cabeza == nullptr) {
+        cabeza = nuevo;
+    } else {
+        Estudiante* actual = cabeza;
+        while (actual->siguiente != nullptr) {
+            actual = actual->siguiente;
+        }
+        actual->siguiente = nuevo;
+    }
+}
+
+// Función para mostrar estudiantes que aprobaron
+void mostrarEstudiantes(Estudiante* cabeza) {
+    Estudiante* actual = cabeza;
+    cout << "\nEstudiantes que PASAN al siguiente curso:\n";
+    while (actual != nullptr) {
+        cout << "Nombre: " << actual->nombre << ", Nota: " << actual->nota << endl;
+        actual = actual->siguiente;
+    }
+}
+
+int main() {
+    Estudiante* listaAprobados = nullptr;
+    int n;
+    string nombre;
+    float nota;
+
+    cout << "==============================\n";
+    cout << " SISTEMA DE PROMOCIÓN DE ESTUDIANTES\n";
+    cout << "       Curso de Programación\n";
+    cout << "         Autor: Alex\n";
+    cout << "==============================\n\n";
+
+    cout << "Ingrese la cantidad de estudiantes: ";
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nEstudiante #" << i + 1 << endl;
+        cout << "Nombre: ";
+        cin >> nombre;
+        cout << "Nota final: ";
+        cin >> nota;
+
+        if (nota >= 11) {
+            agregarEstudiante(listaAprobados, nombre, nota);
+            cout << nombre << " ha aprobado el curso." << endl;
+        } else {
+            cout << nombre << " NO ha aprobado el curso." << endl;
+        }
+    }
+
+    mostrarEstudiantes(listaAprobados);
+
+    return 0;
+}
