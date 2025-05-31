@@ -1,0 +1,677 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=true,
+    frame=single
+}
+
+\begin{titlepage}
+    \centering
+\begin{figure}
+    \centering
+    \label{fig:enter-label}
+\end{figure}
+\begin{figure}
+        \centering
+        \includegraphics[width=0.5\linewidth]{image.png}
+        \label{fig:enter-label}
+    \end{figure}
+        {\scshape\LARGE UNIVERSIDAD NACIONAL DEL ALTIPLANO\par}
+    \vspace{0.5cm}
+    {\scshape\Large Facultad de Ingeniería Estadística e Informática\par}
+    \vspace{1.5cm}
+    {\Huge\bfseries Estructuras de Datos\par}
+    \vspace{2cm}
+    {\large Autor: Condori Calapuja Andre\par}
+    \vspace{1cm}
+    {\large Docente: Ing. Torres Cruz Fred\par}
+    \vspace{2cm}
+    {\large 2025\par}
+    {\large Puno - Perú\par}
+    \vfill
+\end{titlepage}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introducción a Estructuras de Datos}
+\subsection{Conceptos}
+Las estructuras de datos son modelos fundamentales para organizar y almacenar información en la memoria de una computadora. Proporcionan mecanismos eficientes para manipular datos, permitiendo operaciones como inserción, búsqueda, eliminación y ordenamiento de manera óptima.
+
+\begin{itemize}
+    \item \textbf{Por organización:}
+    \begin{itemize}
+        \item \textbf{Lineales:} Elementos dispuestos secuencialmente (arrays, listas, pilas, colas)
+        \item \textbf{No lineales:} Elementos con relaciones jerárquicas o de red (árboles, grafos)
+    \end{itemize}
+    
+    \item \textbf{Por tamaño:}
+    \begin{itemize}
+        \item \textbf{Estáticas:} Tamaño fijo definido en tiempo de compilación (arrays tradicionales)
+        \item \textbf{Dinámicas:} Tamaño variable que puede crecer o reducirse en tiempo de ejecución (listas enlazadas, árboles)
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ejemplo en C++}
+\begin{lstlisting}[language=C++, caption=Ejemplo de estructuras en C++]
+#include <iostream>
+#include <vector>  // Estructura dinámica
+#include <array>   // Estructura estática
+
+int main() {
+    // Array estático (tamaño fijo)
+    std::array<int, 5> arrEstatico = {1, 2, 3, 4, 5};
+    
+    // Vector dinámico (tamaño variable)
+    std::vector<int> vecDinamico = {1, 2, 3};
+    vecDinamico.push_back(4);  // Añadir elemento
+    
+    std::cout << "Array estático: ";
+    for(int num : arrEstatico) {
+        std::cout << num << " ";
+    }
+    
+    std::cout << "\nVector dinámico: ";
+    for(int num : vecDinamico) {
+        std::cout << num << " ";
+    }
+    
+    return 0;
+}
+\end{lstlisting}
+
+\section{Arrays o Arreglos}
+\subsection{Conceptos}
+Los arrays son estructuras de datos lineales y estáticas que almacenan elementos del mismo tipo en posiciones contiguas de memoria. Cada elemento se accede mediante un índice numérico, generalmente comenzando desde 0.
+
+\begin{itemize}
+    \item \textbf{Ventajas:}
+    \begin{itemize}
+        \item Acceso aleatorio rápido (O(1))
+        \item Eficiencia en memoria (solo almacena datos)
+    \end{itemize}
+    
+    \item \textbf{Desventajas:}
+    \begin{itemize}
+        \item Tamaño fijo
+        \item Inserción/eliminación costosas (O(n))
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ejemplo en C++}
+\begin{lstlisting}[language=C++, caption=Operaciones con arrays en C++]
+#include <iostream>
+using namespace std;
+
+void ordenamientoBurbuja(int arr[], int tamaño) {
+    for(int i = 0; i < tamaño-1; i++) {
+        for(int j = 0; j < tamaño-i-1; j++) {
+            if(arr[j] > arr[j+1]) {
+                swap(arr[j], arr[j+1]);
+            }
+        }
+    }
+}
+
+int main() {
+    const int TAMAÑO = 6;
+    int numeros[TAMAÑO] = {30, 10, 50, 20, 40, 60};
+    
+    cout << "Array original: ";
+    for(int i = 0; i < TAMAÑO; i++) {
+        cout << numeros[i] << " ";
+    }
+    
+    ordenamientoBurbuja(numeros, TAMAÑO);
+    
+    cout << "\nArray ordenado: ";
+    for(int i = 0; i < TAMAÑO; i++) {
+        cout << numeros[i] << " ";
+    }
+    
+    // Búsqueda binaria
+    int objetivo = 40;
+    int izquierda = 0, derecha = TAMAÑO - 1;
+    while(izquierda <= derecha) {
+        int medio = izquierda + (derecha - izquierda) / 2;
+        if(numeros[medio] == objetivo) {
+            cout << "\nElemento " << objetivo << " encontrado en posición " << medio;
+            break;
+        }
+        if(numeros[medio] < objetivo) {
+            izquierda = medio + 1;
+        } else {
+            derecha = medio - 1;
+        }
+    }
+    
+    return 0;
+}
+\end{lstlisting}
+
+\section{Registros (Structs)}
+\subsection{Conceptos}
+Los registros (structs en C++) son estructuras de datos compuestas que permiten agrupar variables de diferentes tipos bajo un mismo nombre. Cada variable dentro del struct se denomina miembro o campo.
+
+\begin{itemize}
+    \item \textbf{Características:}
+    \begin{itemize}
+        \item Agrupación lógica de datos relacionados
+        \item Acceso a miembros mediante operador punto (.) o flecha (->)
+        \item Pueden contener otros structs
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ejemplo en C++}
+\begin{lstlisting}[language=C++, caption=Uso de structs en C++]
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Direccion {
+    string calle;
+    int numero;
+    string ciudad;
+};
+
+struct Estudiante {
+    string nombre;
+    int edad;
+    float promedio;
+    Direccion dir;
+};
+
+void mostrarEstudiante(const Estudiante& est) {
+    cout << "Nombre: " << est.nombre << "\n"
+         << "Edad: " << est.edad << "\n"
+         << "Promedio: " << est.promedio << "\n"
+         << "Dirección: " << est.dir.calle << " " 
+         << est.dir.numero << ", " << est.dir.ciudad << "\n";
+}
+
+int main() {
+    Estudiante estudiante1 = {
+        "Ana García",
+        20,
+        8.5,
+        {"Calle Principal", 123, "Ciudad Ejemplo"}
+    };
+    
+    Estudiante grupo[3] = {
+        {"Juan Pérez", 21, 7.8, {"Calle 1", 45, "Ciudad A"}},
+        {"Luisa Méndez", 19, 9.1, {"Calle 2", 67, "Ciudad B"}},
+        estudiante1
+    };
+    
+    grupo[0].promedio = 8.0;
+    
+    for(int i = 0; i < 3; i++) {
+        cout << "\nEstudiante " << i+1 << ":\n";
+        mostrarEstudiante(grupo[i]);
+    }
+    
+    return 0;
+}
+\end{lstlisting}
+
+\section{Listas Enlazadas}
+\subsection{Conceptos}
+Una lista enlazada es una estructura de datos lineal y dinámica compuesta por nodos, donde cada nodo contiene datos y un puntero al siguiente nodo en la secuencia.
+
+\begin{itemize}
+    \item \textbf{Ventajas:}
+    \begin{itemize}
+        \item Tamaño dinámico
+        \item Inserción/eliminación eficientes
+    \end{itemize}
+    
+    \item \textbf{Desventajas:}
+    \begin{itemize}
+        \item Acceso secuencial (O(n))
+        \item Mayor uso de memoria por punteros
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ejemplo en C++}
+\begin{lstlisting}[language=C++, caption=Implementación de lista enlazada en C++]
+#include <iostream>
+using namespace std;
+
+class Nodo {
+public:
+    int dato;
+    Nodo* siguiente;
+    
+    Nodo(int valor) : dato(valor), siguiente(nullptr) {}
+};
+
+class ListaEnlazada {
+private:
+    Nodo* cabeza;
+    Nodo* cola;
+    
+public:
+    ListaEnlazada() : cabeza(nullptr), cola(nullptr) {}
+    
+    ~ListaEnlazada() {
+        while(cabeza != nullptr) {
+            Nodo* temp = cabeza;
+            cabeza = cabeza->siguiente;
+            delete temp;
+        }
+    }
+    
+    void insertarFinal(int valor) {
+        Nodo* nuevo = new Nodo(valor);
+        if(cola == nullptr) {
+            cabeza = cola = nuevo;
+        } else {
+            cola->siguiente = nuevo;
+            cola = nuevo;
+        }
+    }
+    
+    void eliminar(int valor) {
+        Nodo* actual = cabeza;
+        Nodo* previo = nullptr;
+        
+        while(actual != nullptr && actual->dato != valor) {
+            previo = actual;
+            actual = actual->siguiente;
+        }
+        
+        if(actual == nullptr) return;
+        
+        if(previo == nullptr) {
+            cabeza = actual->siguiente;
+            if(cabeza == nullptr) cola = nullptr;
+        } else {
+            previo->siguiente = actual->siguiente;
+            if(actual == cola) cola = previo;
+        }
+        
+        delete actual;
+    }
+    
+    void mostrar() const {
+        Nodo* actual = cabeza;
+        while(actual != nullptr) {
+            cout << actual->dato;
+            if(actual->siguiente != nullptr) cout << " -> ";
+            actual = actual->siguiente;
+        }
+        cout << " -> NULL\n";
+    }
+};
+
+int main() {
+    ListaEnlazada lista;
+    
+    lista.insertarFinal(10);
+    lista.insertarFinal(20);
+    lista.insertarFinal(30);
+    lista.insertarFinal(40);
+    
+    cout << "Lista original: ";
+    lista.mostrar();
+    
+    lista.eliminar(20);
+    cout << "Después de eliminar 20: ";
+    lista.mostrar();
+    
+    lista.insertarFinal(50);
+    cout << "Después de insertar 50: ";
+    lista.mostrar();
+    
+    return 0;
+}
+\end{lstlisting}
+
+\section{Listas Dobles y Circulares}
+\subsection{Conceptos}
+\begin{itemize}
+    \item \textbf{Listas doblemente enlazadas:} Cada nodo tiene punteros al anterior y siguiente.
+    \item \textbf{Listas circulares:} El último nodo apunta al primero.
+    
+    \item \textbf{Ventajas:}
+    \begin{itemize}
+        \item Recorrido bidireccional (dobles)
+        \item Acceso circular sin verificar final
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ejemplo en C++}
+\begin{lstlisting}[language=C++, caption=Lista doble circular en C++]
+#include <iostream>
+using namespace std;
+
+class NodoDoble {
+public:
+    int dato;
+    NodoDoble* anterior;
+    NodoDoble* siguiente;
+    
+    NodoDoble(int valor) : dato(valor), anterior(nullptr), siguiente(nullptr) {}
+};
+
+class ListaDobleCircular {
+private:
+    NodoDoble* cabeza;
+    
+public:
+    ListaDobleCircular() : cabeza(nullptr) {}
+    
+    ~ListaDobleCircular() {
+        if(cabeza == nullptr) return;
+        
+        NodoDoble* actual = cabeza->siguiente;
+        while(actual != cabeza) {
+            NodoDoble* temp = actual;
+            actual = actual->siguiente;
+            delete temp;
+        }
+        delete cabeza;
+    }
+    
+    void insertarFinal(int valor) {
+        NodoDoble* nuevo = new NodoDoble(valor);
+        
+        if(cabeza == nullptr) {
+            cabeza = nuevo;
+            cabeza->anterior = cabeza;
+            cabeza->siguiente = cabeza;
+        } else {
+            NodoDoble* ultimo = cabeza->anterior;
+            
+            nuevo->siguiente = cabeza;
+            nuevo->anterior = ultimo;
+            ultimo->siguiente = nuevo;
+            cabeza->anterior = nuevo;
+        }
+    }
+    
+    void mostrarAdelante() const {
+        if(cabeza == nullptr) {
+            cout << "Lista vacía\n";
+            return;
+        }
+        
+        NodoDoble* actual = cabeza;
+        do {
+            cout << actual->dato;
+            actual = actual->siguiente;
+            if(actual != cabeza) cout << " <-> ";
+        } while(actual != cabeza);
+        cout << " (Circular)\n";
+    }
+};
+
+int main() {
+    ListaDobleCircular lista;
+    
+    lista.insertarFinal(10);
+    lista.insertarFinal(20);
+    lista.insertarFinal(30);
+    lista.insertarFinal(40);
+    
+    cout << "Recorrido hacia adelante: ";
+    lista.mostrarAdelante();
+    
+    return 0;
+}
+\end{lstlisting}
+
+\section{Pilas (Stacks)}
+\subsection{Conceptos}
+Estructura LIFO (Last In, First Out) donde los elementos se insertan y eliminan por el mismo extremo (tope).
+
+\begin{itemize}
+    \item \textbf{Operaciones:}
+    \begin{itemize}
+        \item Push: Insertar en el tope
+        \item Pop: Eliminar del tope
+        \item Peek/Top: Ver el tope sin eliminar
+    \end{itemize}
+    
+    \item \textbf{Aplicaciones:}
+    \begin{itemize}
+        \item Evaluación de expresiones
+        \item Gestión de llamadas a funciones
+        \item Algoritmos de backtracking
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ejemplo en C++}
+\begin{lstlisting}[language=C++, caption=Implementación de pila en C++]
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+bool verificarParentesis(const string& expresion) {
+    stack<char> pila;
+    
+    for(char c : expresion) {
+        switch(c) {
+            case '(': case '[': case '{':
+                pila.push(c);
+                break;
+                
+            case ')':
+                if(pila.empty() || pila.top() != '(') return false;
+                pila.pop();
+                break;
+                
+            case ']':
+                if(pila.empty() || pila.top() != '[') return false;
+                pila.pop();
+                break;
+                
+            case '}':
+                if(pila.empty() || pila.top() != '{') return false;
+                pila.pop();
+                break;
+        }
+    }
+    
+    return pila.empty();
+}
+
+int main() {
+    stack<int> pila;
+    
+    pila.push(10);
+    pila.push(20);
+    pila.push(30);
+    
+    cout << "Tope de la pila: " << pila.top() << endl;
+    pila.pop();
+    cout << "Tope después de pop: " << pila.top() << endl;
+    
+    string expresion1 = "{(a + b) * [c - d]}";
+    string expresion2 = "{(a + b) * [c - d}}";
+    
+    cout << "\nExpresión 1: " << expresion1 << " - ";
+    cout << (verificarParentesis(expresion1) ? "Balanceado" : "No balanceado") << endl;
+    
+    cout << "Expresión 2: " << expresion2 << " - ";
+    cout << (verificarParentesis(expresion2) ? "Balanceado" : "No balanceado") << endl;
+    
+    return 0;
+}
+\end{lstlisting}
+
+\section{Colas (Queues)}
+\subsection{Conceptos}
+Estructura FIFO (First In, First Out) donde los elementos se insertan por un extremo (final) y se eliminan por el otro (frente).
+
+\begin{itemize}
+    \item \textbf{Variantes:}
+    \begin{itemize}
+        \item Cola circular
+        \item Cola doble (deque)
+        \item Cola de prioridad
+    \end{itemize}
+    
+    \item \textbf{Aplicaciones:}
+    \begin{itemize}
+        \item Gestión de procesos
+        \item Buffers de impresión
+        \item Simulación de líneas de espera
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ejemplo en C++}
+\begin{lstlisting}[language=C++, caption=Implementación de cola en C++]
+#include <iostream>
+#include <queue>
+#include <deque>
+using namespace std;
+
+void simulacionAtencionClientes() {
+    queue<string> colaClientes;
+    
+    colaClientes.push("Cliente 1");
+    colaClientes.push("Cliente 2");
+    colaClientes.push("Cliente 3");
+    
+    cout << "Proceso de atención:\n";
+    while(!colaClientes.empty()) {
+        string clienteActual = colaClientes.front();
+        colaClientes.pop();
+        
+        cout << "Atendiendo a " << clienteActual << endl;
+    }
+    cout << "Todos los clientes atendidos\n";
+}
+
+int main() {
+    queue<int> cola;
+    
+    cola.push(10);
+    cola.push(20);
+    cola.push(30);
+    
+    cout << "Frente de la cola: " << cola.front() << endl;
+    cola.pop();
+    cout << "Nuevo frente después de dequeue: " << cola.front() << endl;
+    
+    deque<int> colaDoble;
+    colaDoble.push_back(10);
+    colaDoble.push_front(5);
+    colaDoble.push_back(20);
+    
+    cout << "\nCola doble: ";
+    for(int num : colaDoble) {
+        cout << num << " ";
+    }
+    cout << endl;
+    
+    cout << "\nSimulación de atención:\n";
+    simulacionAtencionClientes();
+    
+    return 0;
+}
+\end{lstlisting}
+
+\section{Recursión}
+\subsection{Conceptos}
+Técnica donde una función se llama a sí misma para resolver problemas que pueden dividirse en subproblemas más pequeños.
+
+\begin{itemize}
+    \item \textbf{Componentes:}
+    \begin{itemize}
+        \item Caso base: Condición de terminación
+        \item Caso recursivo: Llamada con subproblema más pequeño
+    \end{itemize}
+    
+    \item \textbf{Ventajas:}
+    \begin{itemize}
+        \item Código más claro para ciertos problemas
+        \item Natural para algoritmos divide y vencerás
+    \end{itemize}
+    
+    \item \textbf{Desventajas:}
+    \begin{itemize}
+        \item Posible desbordamiento de pila
+        \item Ineficiencia en algunos casos
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ejemplo en C++}
+\begin{lstlisting}[language=C++, caption=Ejemplos de recursión en C++]
+#include <iostream>
+#include <vector>
+using namespace std;
+
+unsigned long long factorial(int n) {
+    if(n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+int busquedaBinaria(const vector<int>& arr, int objetivo, int izquierda, int derecha) {
+    if(izquierda > derecha) return -1;
+    
+    int medio = izquierda + (derecha - izquierda) / 2;
+    
+    if(arr[medio] == objetivo) {
+        return medio;
+    } else if(arr[medio] < objetivo) {
+        return busquedaBinaria(arr, objetivo, medio + 1, derecha);
+    } else {
+        return busquedaBinaria(arr, objetivo, izquierda, medio - 1);
+    }
+}
+
+void recorridoPreorden(int nodo, int nivel) {
+    if(nodo > 15) return;
+    
+    cout << string(nivel*2, ' ') << nodo << "\n";
+    recorridoPreorden(2*nodo, nivel+1);
+    recorridoPreorden(2*nodo+1, nivel+1);
+}
+
+int main() {
+    int num = 5;
+    cout << "Factorial de " << num << " es " << factorial(num) << "\n\n";
+    
+    vector<int> arr = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+    int objetivo = 23;
+    int resultado = busquedaBinaria(arr, objetivo, 0, arr.size() - 1);
+    
+    cout << "Búsqueda binaria: " << objetivo << " está en índice " << resultado << "\n\n";
+    
+    cout << "Recorrido preorden de árbol binario:\n";
+    recorridoPreorden(1, 0);
+    
+    return 0;
+}
+\end{lstlisting}
+
+\end{document}
